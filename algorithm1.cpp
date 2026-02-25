@@ -1,3 +1,7 @@
+// Names: Ivy Loi, Homan Qiu, Richie Nguyen, Robert Gutierrez
+// CPSC 335 Section 11
+// Project 1: Algorithm 1
+// 2/24/26
 #include <iostream>
 #include <list>
 #include <cstdlib>
