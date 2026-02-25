@@ -35,6 +35,7 @@ int main() {
         std::cout << "Enter your choice: ";
         std::cin >> input;
         
+        // for if user inputs something that's not a number
         if (std::cin.fail()) {
             std::cout << "Invalid input, we only accept 1, 2, 3, 4, or 5 as an answer." << std::endl;
             std::cin.clear(); // clear the error flag
@@ -137,6 +138,10 @@ int main() {
             // exits program
             std::cout << "Exiting..." << std::endl;
             return EXIT_SUCCESS;
+        } else {
+            // for if user enters numbers other than 1, 2, 3, 4, or 5
+            std::cout << "Invalid choice, please try again." << std::endl;
+            continue;
         }
     }
     return 0;
