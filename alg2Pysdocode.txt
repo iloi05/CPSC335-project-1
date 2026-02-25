@@ -1,0 +1,18 @@
+//we pretend we have a good starting city
+startCity = 0
+tank = 0
+
+for i from 0 to len(city_distances) - 1:
+    //calculate tank
+    tank += fuel[i] * mpg
+    tank -= city_distances[i]
+
+    if tank < 0:
+        //if the tank if less than 0 set the start city to the next one
+        startCity = i + 1
+        tank = 0
+
+return startCity
+
+
+
