@@ -36,7 +36,7 @@ int main() {
         std::cin >> input;
         
         if (std::cin.fail()) {
-            std::cout << "Invalid input. Please enter a valid option." << std::endl;
+            std::cout << "Invalid input, we only accept 1, 2, 3, 4, or 5 as an answer." << std::endl;
             std::cin.clear(); // clear the error flag
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
             continue;
@@ -47,11 +47,11 @@ int main() {
             std::cout << "Enter a number to add to Row One: ";
             std::cin >> rOadd; // adding to row 1
             if (rOadd < 0) {
-                std::cout << "Negative numbers are not allowed. Please enter a positive number." << std::endl;
+                std::cout << "Positive numbers only." << std::endl;
                 break;
             }
             if (std::cin.fail()) {
-                std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                std::cout << "Invalid input, please enter a valid number that's positive." << std::endl;
                 std::cin.clear(); // clear the error flag
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
                 continue;
@@ -66,7 +66,7 @@ int main() {
                 break;
             }
             if (std::cin.fail()) {
-                std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                std::cout << "Invalid input, please enter a valid number that's positive." << std::endl;
                 std::cin.clear(); // clear the error flag
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
                 continue;
@@ -111,7 +111,7 @@ int main() {
                 std::cout << "Enter the number from Row One: ";
                 std::cin >> swapOne;
                 if (std::cin.fail()) {
-                    std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                    std::cout << "Invalid input. Please enter a valid number that's positive." << std::endl;
                     std::cin.clear(); // clear the error flag
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
                     continue;
@@ -119,7 +119,7 @@ int main() {
                 std::cout << "Enter the number from Row Two: ";
                 std::cin >> swapTwo;
                 if (std::cin.fail()) {
-                    std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                    std::cout << "Invalid input, please enter a valid number that's positive." << std::endl;
                     std::cin.clear(); // clear the error flag
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
                     continue;
@@ -129,7 +129,7 @@ int main() {
                 if (itOne != rowOne.end() && itTwo != rowTwo.end()) {
                     std::iter_swap(itOne, itTwo);
                 } else {
-                    std::cout << "One or both numbers not found. Please try again." << std::endl;
+                    std::cout << "One or both numbers not found, please try again :)." << std::endl;
                 }
                 continue;
             }
