@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <algorithm>
 #include <iterator>
+#include <limits>
+
 
 int main() {
     std::list<int> rowOne;
@@ -28,16 +30,43 @@ int main() {
 
         std::cout << "Enter your choice: ";
         std::cin >> input;
+        
+        if (std::cin.fail()) {
+            std::cout << "Invalid input. Please enter a valid option." << std::endl;
+            std::cin.clear(); // clear the error flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
+            continue;
+        }
 
     
         if (input == 1) {
             std::cout << "Enter a number to add to Row One: ";
             std::cin >> rOadd; // adding to row 1
+            if (rOadd < 0) {
+                std::cout << "Negative numbers are not allowed. Please enter a positive number." << std::endl;
+                break;
+            }
+            if (std::cin.fail()) {
+                std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                std::cin.clear(); // clear the error flag
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
+                continue;
+            }
             rowOne.push_back(rOadd);
             continue;
         } else if (input == 2) {
             std::cout << "Enter a number to add to Row Two: ";
             std::cin >> rTadd; // adding to row 2
+            if (rTadd < 0) {
+                std::cout << "Negative numbers are not allowed. Please enter a positive number." << std::endl;
+                break;
+            }
+            if (std::cin.fail()) {
+                std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                std::cin.clear(); // clear the error flag
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
+                continue;
+            }
             rowTwo.push_back(rTadd);
             continue;
         } else if (input == 3) { // display the two rows
@@ -77,8 +106,20 @@ int main() {
                 std::cout << "Which two numbers would you like to swap?" << std::endl;
                 std::cout << "Enter the number from Row One: ";
                 std::cin >> swapOne;
+                if (std::cin.fail()) {
+                    std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                    std::cin.clear(); // clear the error flag
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
+                    continue;
+                }
                 std::cout << "Enter the number from Row Two: ";
                 std::cin >> swapTwo;
+                if (std::cin.fail()) {
+                    std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                    std::cin.clear(); // clear the error flag
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
+                    continue;
+                }
                 std::list<int>::iterator itOne = std::find(rowOne.begin(), rowOne.end(), swapOne);
                 std::list<int>::iterator itTwo = std::find(rowTwo.begin(), rowTwo.end(), swapTwo);
                 if (itOne != rowOne.end() && itTwo != rowTwo.end()) {
@@ -92,10 +133,6 @@ int main() {
             // exits program
             std::cout << "Exiting..." << std::endl;
             return EXIT_SUCCESS;
-        } else { 
-            // Invalid input loops back to start of menu
-            std::cout << "Invalid choice. Please try again." << std::endl;
-            continue;
         }
     }
     return 0;
