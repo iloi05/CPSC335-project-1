@@ -30,21 +30,17 @@ int main() {
         // Option 4 should allow user to swap any elements in the two lists
         std::cout << "4. Swap Rows" << std::endl;
         // option 5 exits the program
-        std::cout << "5. Exit" << std::endl;
-
+        std::cout << "5. Exit" << std::endl;        
         std::cout << "Enter your choice: ";
         std::cin >> input;
-        
+ 
         // for if user inputs something that's not a number
         if (std::cin.fail()) {
             std::cout << "Invalid input, we only accept 1, 2, 3, 4, or 5 as an answer." << std::endl;
             std::cin.clear(); // clear the error flag
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
             continue;
-        }
-
-    
-        if (input == 1) {
+                if (input == 1) {
             std::cout << "Enter a number to add to Row One: ";
             std::cin >> rOadd; // adding to row 1
             if (rOadd < 0) {
@@ -145,4 +141,5 @@ int main() {
         }
     }
     return 0;
+    }
 }
