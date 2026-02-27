@@ -3,143 +3,51 @@
 // Project 1: Algorithm 1
 // 2/24/26
 #include <iostream>
-#include <list>
-#include <cstdlib>
+#include <vector>
 #include <algorithm>
-#include <iterator>
-#include <limits>
 
 
-int main() {
-    std::list<int> rowOne;
-    std::list<int> rowTwo;
-    int rOadd;
-    int rTadd;
-    int input;
-    int swapOne;
-    int swapTwo;
-    while (true) {
-        // Main menu allows user to see what they can do with the list
-        std::cout << "Main Menu" << std::endl;
-        std::cout << std::endl;
-        /*Options 1 & 2 allow the user to add any 
-        available number of couples*/
-        std::cout << "1. Add to Row One" << std::endl;
-        std::cout << "2. Add to Row Two" << std::endl;
-        std::cout << "3. Display Rows" << std::endl;
-        // Option 4 should allow user to swap any elements in the two lists
-        std::cout << "4. Swap Rows" << std::endl;
-        // option 5 exits the program
-        std::cout << "5. Exit" << std::endl;        
-        std::cout << "Enter your choice: ";
-        std::cin >> input;
- 
-        // for if user inputs something that's not a number
-        if (std::cin.fail()) {
-            std::cout << "Invalid input, we only accept 1, 2, 3, 4, or 5 as an answer." << std::endl;
-            std::cin.clear(); // clear the error flag
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
-            continue;
-                if (input == 1) {
-            std::cout << "Enter a number to add to Row One: ";
-            std::cin >> rOadd; // adding to row 1
-            if (rOadd < 0) {
-                std::cout << "Positive numbers only." << std::endl;
-                break;
+
+int swapSeat(std::vector<int>& row) {
+    // for counting swaps
+    int count = 0;
+    // Loop through the row and check if each seat is in the correct order
+    for (int i = 0; i < row.size() - 1; i++) {
+        // Calculate the partner seat for the current seat
+        int partner = row[i] ^ 1;
+        // Get the next seat in the row
+        int next = row[i + 1];
+        // If the current seat is not in the correct order
+        if (next != partner) {
+            // Find the correct seat for the current passenger
+            auto it = std::find(row.begin() + i + 2, row.end(), partner);
+            if (it != row.end()) {
+                // Swap the current seat with the correct seat
+                std::iter_swap(row.begin() + i + 1, it);
+                // Increment the swap count
+                count++;
             }
-            if (std::cin.fail()) {
-                std::cout << "Invalid input, please enter a valid number that's positive." << std::endl;
-                std::cin.clear(); // clear the error flag
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
-                continue;
-            }
-            rowOne.push_back(rOadd);
-            continue;
-        } else if (input == 2) {
-            std::cout << "Enter a number to add to Row Two: ";
-            std::cin >> rTadd; // adding to row 2
-            if (rTadd < 0) {
-                std::cout << "Negative numbers are not allowed. Please enter a positive number." << std::endl;
-                break;
-            }
-            if (std::cin.fail()) {
-                std::cout << "Invalid input, please enter a valid number that's positive." << std::endl;
-                std::cin.clear(); // clear the error flag
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
-                continue;
-            }
-            rowTwo.push_back(rTadd);
-            continue;
-        } else if (input == 3) { // display the two rows
-            // checking if both rows are empty, loop back to main menu if yes
-            if (rowOne.empty() && rowTwo.empty()) {
-                std::cout << "Both rows are empty." << std::endl;
-                std::cout << "Add numbers to the rows to see them displayed." << std::endl;
-                continue;
-            }
-            // checking if only 1 row is empty, will display whichever one isn't empty
-            if (rowOne.empty() && !rowTwo.empty()) {
-                std::cout << "Row One is empty." << std::endl;
-            } else {
-                std::cout << "Row One: ";
-                for (int num : rowOne) {
-                    std::cout << num << " ";
-                }
-                std::cout << std::endl;
-            }
-            if (rowTwo.empty() && !rowOne.empty()) {
-                std::cout << "Row Two is empty." << std::endl;
-            } else {
-                std::cout << "Row Two: ";
-                for (int num : rowTwo) {
-                    std::cout << num << " ";
-                }
-                std::cout << std::endl;
-            }
-            continue;
-        } else if (input == 4) {
-            // checking if either row is empty, loop back to main menu if yes
-            if (rowOne.empty() || rowTwo.empty()) {
-                std::cout << "Both rows must have at least one number to swap. Please add numbers to both rows first." << std::endl;
-                continue;
-            } else {
-            // have user enter a number from each row to swap, then swap the two numbers
-                std::cout << "Which two numbers would you like to swap?" << std::endl;
-                std::cout << "Enter the number from Row One: ";
-                std::cin >> swapOne;
-                if (std::cin.fail()) {
-                    std::cout << "Invalid input. Please enter a valid number that's positive." << std::endl;
-                    std::cin.clear(); // clear the error flag
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
-                    continue;
-                }
-                std::cout << "Enter the number from Row Two: ";
-                std::cin >> swapTwo;
-                if (std::cin.fail()) {
-                    std::cout << "Invalid input, please enter a valid number that's positive." << std::endl;
-                    std::cin.clear(); // clear the error flag
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
-                    continue;
-                }
-                std::list<int>::iterator itOne = std::find(rowOne.begin(), rowOne.end(), swapOne);
-                std::list<int>::iterator itTwo = std::find(rowTwo.begin(), rowTwo.end(), swapTwo);
-                if (itOne != rowOne.end() && itTwo != rowTwo.end()) {
-                    std::iter_swap(itOne, itTwo);
-                } else {
-                    std::cout << "One or both numbers not found, please try again :)." << std::endl;
-                }
-                continue;
-            }
-        } else if (input == 5) {
-            // exits program
-            std::cout << "Exiting..." << std::endl;
-            return EXIT_SUCCESS;
-        } else {
-            // for if user enters numbers other than 1, 2, 3, 4, or 5
-            std::cout << "Invalid choice, please try again." << std::endl;
-            continue;
         }
     }
-    return 0;
+    return count;
+}
+int main() {
+    std::vector<int> sample1 = {0, 2, 1, 3};
+    std::vector<int> sample2 = {3, 2, 0, 1};
+
+    std::cout << "Sample 1: ";
+    for (int seat : sample1) {
+        std::cout << seat << " ";
     }
+    std::cout << std::endl;
+    std::cout << "Seat swapped for sample1: " << swapSeat(sample1) << std::endl;
+    std::cout << "Sample 2: ";
+    for (int seat : sample2) {
+        std::cout << seat << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "Seat swapped for sample2: " << swapSeat(sample2) << std::endl;
+    
+   
+    return 0;
 }
