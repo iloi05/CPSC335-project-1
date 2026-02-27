@@ -1,0 +1,21 @@
+// We're given two sample rows.
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+// Make a function that counts the swaps
+swapSeat (std::vector<int>& row) {
+    int count = 0
+    for each element in the vector:
+        if (next element in vector != right partner) {
+            auto it = std::find(row.begin() + i + 2, row.end(), partner);
+            if iterator isn't at end of vector {
+                swap;
+                count ++;
+            }          
+        }
+    return count;
+}
+
+
