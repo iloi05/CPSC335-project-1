@@ -14,9 +14,11 @@ int swapSeat(std::vector<int>& row) {
     // Loop through the row and check if each seat is in the correct order
     for (int i = 0; i < row.size() - 1; i++) {
         // If the current seat is not in the correct order
-        if (row[i + 1] != row[i] ^ 1) {
+        // row[i] ^ 1 is partner number calculation
+        int next = row[i] ^ 1;
+        if (row[i + 1] != next) {
             // Find the correct seat for the current passenger
-            auto it = std::find(row.begin() + i + 2, row.end(), row[i] ^ 1);
+            auto it = std::find(row.begin() + i + 2, row.end(), next);
             if (it != row.end()) {
                 // Swap the current seat with the correct seat
                 std::iter_swap(row.begin() + i + 1, it);
